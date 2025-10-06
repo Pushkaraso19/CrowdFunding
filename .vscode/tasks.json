@@ -1,0 +1,14 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Compile Hardhat Contracts",
+			"type": "shell",
+			"command": "npx hardhat compile --config ./hardhat.config.cjs",
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		}
+	]
+}
