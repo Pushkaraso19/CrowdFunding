@@ -1,0 +1,152 @@
+export const CROWDFUNDING_ABI = [
+  {
+    type: "function",
+    name: "createCampaign",
+    stateMutability: "nonpayable",
+    inputs: [
+      { name: "title", type: "string" },
+      { name: "goal", type: "uint256" },
+      { name: "deadline", type: "uint256" },
+      { name: "description", type: "string" },
+    ],
+    outputs: [{ name: "", type: "uint256" }],
+  },
+  {
+    type: "function",
+    name: "contribute",
+    stateMutability: "payable",
+    inputs: [{ name: "id", type: "uint256" }],
+    outputs: [],
+  },
+  {
+    type: "function",
+    name: "withdrawFunds",
+    stateMutability: "nonpayable",
+    inputs: [{ name: "id", type: "uint256" }],
+    outputs: [],
+  },
+  {
+    type: "function",
+    name: "refundContributors",
+    stateMutability: "nonpayable",
+    inputs: [{ name: "id", type: "uint256" }],
+    outputs: [],
+  },
+  {
+    type: "function",
+    name: "getCampaignCount",
+    stateMutability: "view",
+    inputs: [],
+    outputs: [{ type: "uint256" }],
+  },
+  {
+    type: "function",
+    name: "getCampaign",
+    stateMutability: "view",
+    inputs: [{ name: "id", type: "uint256" }],
+    outputs: [
+      {
+        components: [
+          { name: "id", type: "uint256" },
+          { name: "title", type: "string" },
+          { name: "description", type: "string" },
+          { name: "creator", type: "address" },
+          { name: "goal", type: "uint256" },
+          { name: "deadline", type: "uint256" },
+          { name: "totalRaised", type: "uint256" },
+          { name: "withdrawn", type: "bool" },
+          { name: "contributorCount", type: "uint256" },
+        ],
+        type: "tuple",
+      },
+    ],
+  },
+  {
+    type: "function",
+    name: "getCampaigns",
+    stateMutability: "view",
+    inputs: [],
+    outputs: [
+      {
+        components: [
+          { name: "id", type: "uint256" },
+          { name: "title", type: "string" },
+          { name: "description", type: "string" },
+          { name: "creator", type: "address" },
+          { name: "goal", type: "uint256" },
+          { name: "deadline", type: "uint256" },
+          { name: "totalRaised", type: "uint256" },
+          { name: "withdrawn", type: "bool" },
+          { name: "contributorCount", type: "uint256" },
+        ],
+        type: "tuple[]",
+      },
+    ],
+  },
+  {
+    type: "function",
+    name: "getContributorAt",
+    stateMutability: "view",
+    inputs: [
+      { name: "id", type: "uint256" },
+      { name: "index", type: "uint256" },
+    ],
+    outputs: [
+      { name: "contributor", type: "address" },
+      { name: "amount", type: "uint256" },
+    ],
+  },
+  {
+    type: "function",
+    name: "getContributionOf",
+    stateMutability: "view",
+    inputs: [
+      { name: "id", type: "uint256" },
+      { name: "user", type: "address" },
+    ],
+    outputs: [{ type: "uint256" }],
+  },
+  {
+    type: "event",
+    name: "CampaignCreated",
+    inputs: [
+      { name: "id", type: "uint256", indexed: true },
+      { name: "creator", type: "address", indexed: true },
+      { name: "title", type: "string", indexed: false },
+      { name: "goal", type: "uint256", indexed: false },
+      { name: "deadline", type: "uint256", indexed: false },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "ContributionReceived",
+    inputs: [
+      { name: "id", type: "uint256", indexed: true },
+      { name: "contributor", type: "address", indexed: true },
+      { name: "amount", type: "uint256", indexed: false },
+      { name: "newTotal", type: "uint256", indexed: false },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "FundsWithdrawn",
+    inputs: [
+      { name: "id", type: "uint256", indexed: true },
+      { name: "creator", type: "address", indexed: true },
+      { name: "amount", type: "uint256", indexed: false },
+    ],
+    anonymous: false,
+  },
+  {
+    type: "event",
+    name: "RefundClaimed",
+    inputs: [
+      { name: "id", type: "uint256", indexed: true },
+      { name: "contributor", type: "address", indexed: true },
+      { name: "amount", type: "uint256", indexed: false },
+    ],
+    anonymous: false,
+  },
+] as const
